@@ -33,14 +33,11 @@ class ChangePasswordFormTest extends TestCase
         $form->new_password_repeat = "1ian1uo";
         $this->assertTrue($form->validate());
         $form->verifyOldPassword('old_password', []);
-
-        $form->validate();
-        $this->assertTrue(empty($form->getErrors()));
+        $this->assertTrue($form->validate());
 
         $form->old_password = "1ianlu0";
         $form->verifyOldPassword('old_password', []);
-        $form->validate();
-        $this->assertFalse(empty($form->getErrors()));
+        $this->assertFalse($form->validate());
 
         Yii::$app->user->logout();
         try {
